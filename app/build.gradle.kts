@@ -40,4 +40,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // Add AWS dependencies for sign in and sign up activities
+    implementation("com.amazonaws:aws-android-sdk-s3:2.66.0")
+    implementation("com.amazonaws:aws-android-sdk-core:2.66.0")
 }

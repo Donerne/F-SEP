@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/emailEditText"
+        android:id="@+id/emailSignIn"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="30dp"
@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@id/signInTitle" />
 
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/passwordSignIn"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="30dp"
@@ -56,10 +56,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailEditText" />
+        app:layout_constraintTop_toBottomOf="@id/emailSignIn" />
 
     <Button
-        android:id="@+id/signInButton"
+        android:id="@+id/btnSignIn"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="30dp"
@@ -70,10 +70,10 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+        app:layout_constraintTop_toBottomOf="@id/passwordSignIn" />
 
     <TextView
-        android:id="@+id/signUpRedirect"
+        android:id="@+id/tvGoToSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -83,5 +83,6 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signInButton" />
+        app:layout_constraintTop_toBottomOf="@id/btnSignIn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

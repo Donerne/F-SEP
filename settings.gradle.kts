@@ -16,6 +16,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://aws.oss.sonatype.org/content/repositories/releases/") }
     }
 }
 

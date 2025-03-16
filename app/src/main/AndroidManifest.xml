@@ -1,38 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="com.example.f_sep">
 
-    <!--  Add permission to allow network access to AWS S3 * -->
+    <!-- Internet permission for AWS S3 communication -->
     <uses-permission android:name="android.permission.INTERNET"/>
-
-    <!--  Add permission to allow read and write from the cloud * -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="AuthApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FSEP"
-        tools:targetApi="31">
-        <activity
-            android:name=".SignInActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SignUpActivity"
-            android:exported="false" />
+        android:theme="@style/Theme.AuthApp">
+
+        <!-- Main launcher activity with explicit android:exported="true" -->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"> <!-- Required for Android 12+ -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Sign In Activity -->
+        <activity android:name=".SignInActivity" android:exported="false"/>
+
+        <!-- Sign Up Activity -->
+        <activity android:name=".SignUpActivity" android:exported="false"/>
+
     </application>
 
 </manifest>

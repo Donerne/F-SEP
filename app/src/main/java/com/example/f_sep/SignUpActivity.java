@@ -22,9 +22,9 @@ public class SignUpActivity extends AppCompatActivity {
     private Button btnSignUp;
     private TextView tvGoToSignIn;
 
-    private static final String ACCESS_KEY = "YOUR_ACCESS_KEY";
-    private static final String SECRET_KEY = "YOUR_SECRET_KEY";
-    private static final String BUCKET_NAME = "your-bucket-name";
+    private static final String ACCESS_KEY = "AKIA3FRRIP4VGHFMEDP6";
+    private static final String SECRET_KEY = "pk3qzlj4TQpA43PF0pOSvnGtZGdXhh6UKCMUrfKg";
+    private static final String BUCKET_NAME = "f-sep";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

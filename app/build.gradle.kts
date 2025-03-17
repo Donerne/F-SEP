@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -29,6 +31,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    packagingOptions {
+        exclude ("META-INF/DEPENDENCIES")
+    }
+
 }
 
 dependencies {
@@ -42,8 +49,24 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     // Add AWS S3 dependencies for sign in and sign up activities
-    implementation("com.amazonaws:aws-android-sdk-s3:2.66.0")
-    implementation("com.amazonaws:aws-android-sdk-core:2.66.0")
-    implementation("com.amazonaws:aws-android-sdk-auth-core:2.66.0")
+//    implementation("com.amazonaws:aws-android-sdk-s3:2.16.10")
+//    implementation("com.amazonaws:aws-android-sdk-core:2.16.10")
+//    implementation("com.amazonaws:aws-android-sdk-auth-core:2.16.10")
+
+
+    implementation ("com.amazonaws:aws-java-sdk-core:1.12.250") // Using the Java SDK if needed
+
+    // AWS SDK for S3
+    implementation ("com.amazonaws:aws-java-sdk-s3:1.12.250")
+
 }
+
+
+configurations.all {
+    resolutionStrategy {
+        force ("com.amazonaws:aws-java-sdk-core:1.12.250")  // Force the Java SDK version of core
+        force ("com.amazonaws:aws-java-sdk-s3:1.12.250")    // Force the Java SDK version of S3
+    }
+}
+
 

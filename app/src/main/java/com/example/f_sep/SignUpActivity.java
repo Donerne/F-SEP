@@ -34,7 +34,7 @@ public class SignUpActivity extends AppCompatActivity {
         email = findViewById(R.id.emailSignUp);
         password = findViewById(R.id.passwordSignUp);
         btnSignUp = findViewById(R.id.btnSignUp);
-        tvGoToSignIn = findViewById(R.id.tvGoToSignIn);
+        tvGoToSignIn = findViewById(R.id.signInRedirect);
 
         btnSignUp.setOnClickListener(v -> {
             String userEmail = email.getText().toString();

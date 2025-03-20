@@ -13,9 +13,9 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.regions.Regions;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
 
 
 public class SignInActivity extends AppCompatActivity {
@@ -24,14 +24,10 @@ public class SignInActivity extends AppCompatActivity {
     private Button btnSignIn;
     private TextView tvGoToSignUp;
 
-//    private static final String ACCESS_KEY = "AKIA3FRRIP4VGHFMEDP6";
-//    private static final String SECRET_KEY = "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";
-//    private static final String BUCKET_NAME = "f-sep";
+    private String accessKey;
+    private String secretKey;
+    private String bucketName;
 
-
-    private static final String ACCESS_KEY = "AKIAQ3EGT44632GVYX4W";
-    private static final String SECRET_KEY = "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";
-    private static final String BUCKET_NAME = "f-sep-app";
 
 
     @Override
@@ -40,6 +36,13 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         System.setProperty("com.amazonaws.sdk.disableJMX", "true");
+
+
+
+        accessKey = BuildConfig.ACCESS_KEY;
+        bucketName = BuildConfig.BUCKET_NAME;
+        secretKey = BuildConfig.SECRET_KEY;
+
 
         email = findViewById(R.id.emailSignIn);
         password = findViewById(R.id.passwordSignIn);
@@ -61,11 +64,12 @@ public class SignInActivity extends AppCompatActivity {
         tvGoToSignUp.setOnClickListener(v -> startActivity(new Intent(SignInActivity.this, SignUpActivity.class)));
     }
 
+
     private boolean authenticateUser(String email, String password) {
         try {
 
             // Initialize static credentials
-            BasicAWSCredentials awsCredentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
+            BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
 
             // Initialize the Amazon S3 client using the static credentials
             AmazonS3 s3Client = new AmazonS3Client(awsCredentials);
@@ -74,15 +78,14 @@ public class SignInActivity extends AppCompatActivity {
 
 
             String key = "users/" + email + ".txt";
-            if (s3Client.doesObjectExist(BUCKET_NAME, key)) {
+            if (s3Client.doesObjectExist(bucketName, key)) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    s3Client.getObject(BUCKET_NAME, key).getObjectContent()
+                    s3Client.getObject(bucketName, key).getObjectContent()
             ));
             String storedPassword = reader.readLine();  // Read the first line (which you can discard)
             storedPassword = reader.readLine().split(": ")[1].trim();  // Read the second line and process it\
             return storedPassword.equals(password);
             }
-
 
         } catch (Exception e) {
             Log.e("SignInDebug", "Error: " + e.getMessage(), e);

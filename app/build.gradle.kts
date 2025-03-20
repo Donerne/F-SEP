@@ -1,10 +1,19 @@
 import com.android.build.api.dsl.Packaging
+import java.util.Properties
+
+val localProperties = Properties().apply {
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        load(localPropertiesFile.inputStream())
+    }
+}
 
 // Project-level build.gradle
 buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath ("com.android.tools.build:gradle:8.1.0")
@@ -27,6 +36,15 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+      // Inject environment variables into BuildConfig
+//        buildConfigField("String", "ACCESS_KEY", "\"${properties["ACCESS_KEY"]}\"")
+//        buildConfigField("String", "SECRET_KEY", "\"${properties["SECRET_KEY"]}\"")
+//        buildConfigField("String", "BUCKET_NAME", "\"${properties["BUCKET_NAME"]}\"")
+
+        buildConfigField("String", "ACCESS_KEY", "\"${localProperties.getProperty("ACCESS_KEY")}\"")
+        buildConfigField("String", "SECRET_KEY", "\"${localProperties.getProperty("SECRET_KEY")}\"")
+        buildConfigField("String", "BUCKET_NAME", "\"${localProperties.getProperty("BUCKET_NAME")}\"")
     }
 
     buildTypes {
@@ -38,6 +56,11 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        buildConfig = true // Enable BuildConfig feature
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -48,6 +71,7 @@ android {
     }
 
 }
+
 
 dependencies {
 
@@ -63,26 +87,6 @@ dependencies {
     implementation("com.amazonaws:aws-android-sdk-s3:2.72.0")
     implementation("com.amazonaws:aws-android-sdk-core:2.72.0")
     implementation("com.amazonaws:aws-android-sdk-auth-core:2.72.0")
+    implementation("io.github.cdimascio:dotenv-java:3.0.0")
+
 }
-
-
-//repositories {
-//    google()
-//    mavenCentral()
-
-
-
-//    implementation ("com.amazonaws:aws-java-sdk-core:1.12.250") // Using the Java SDK if needed
-//
-//    // AWS SDK for S3
-//    implementation ("com.amazonaws:aws-java-sdk-s3:1.12.250")
-
-
-
-//configurations.all {
-//    resolutionStrategy {
-//        force ("com.amazonaws:aws-java-sdk-core:1.12.250")  // Force the Java SDK version of core
-//        force ("com.amazonaws:aws-java-sdk-s3:1.12.250")    // Force the Java SDK version of S3
-//    }
-
-

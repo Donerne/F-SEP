@@ -101,7 +101,7 @@ public class SignInActivity extends AppCompatActivity {
             runOnUiThread(() -> {
                 if (isAuthenticated) {
                     Toast.makeText(SignInActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SignInActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(SignInActivity.this, CompaniesActivity.class);
                     startActivity(intent);
                     finish();
                 } else {

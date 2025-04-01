@@ -76,7 +76,6 @@ public class SignInActivity extends AppCompatActivity {
             s3Client.setRegion(Region.getRegion(Regions.US_EAST_1)); // Change to your region
 
 
-
             String key = "users/" + email + ".txt";
             if (s3Client.doesObjectExist(bucketName, key)) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
@@ -110,5 +109,4 @@ public class SignInActivity extends AppCompatActivity {
             });
         }).start();
     }
-
 }

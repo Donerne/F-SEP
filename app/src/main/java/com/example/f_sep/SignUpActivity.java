@@ -1,5 +1,6 @@
 package com.example.f_sep;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +23,7 @@ import java.util.concurrent.Executors;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private EditText email, password;
+    private EditText email, password, name;
     private Button btnSignUp;
     private TextView tvGoToSignIn;
 
@@ -32,6 +33,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,24 +47,26 @@ public class SignUpActivity extends AppCompatActivity {
 
         email = findViewById(R.id.emailSignUp);
         password = findViewById(R.id.passwordSignUp);
+        name = findViewById(R.id.userNameText);
         btnSignUp = findViewById(R.id.btnSignUp);
         tvGoToSignIn = findViewById(R.id.signInRedirect);
 
         btnSignUp.setOnClickListener(v -> {
             String userEmail = email.getText().toString().trim();
             String userPassword = password.getText().toString().trim();
+            String userName = name.getText().toString().trim();
 
-            if (userEmail.isEmpty() || userPassword.isEmpty()) {
+            if (userEmail.isEmpty() || userPassword.isEmpty() || userName.isEmpty()) {
                 Toast.makeText(SignUpActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             } else {
-                uploadUserDataAsync(userEmail, userPassword);
+                uploadUserDataAsync(userEmail, userPassword, userName);
             }
         });
 
         tvGoToSignIn.setOnClickListener(v -> startActivity(new Intent(SignUpActivity.this, SignInActivity.class)));
     }
 
-    private void uploadUserDataAsync(String email, String password) {
+    private void uploadUserDataAsync(String email, String password, String user) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             try {
@@ -75,7 +79,7 @@ public class SignUpActivity extends AppCompatActivity {
                 s3Client.setRegion(Region.getRegion(Regions.US_EAST_1)); // Change to your region
 
 
-                String data = "Email: " + email + "\nPassword: " + password;
+                String data = "Email: " + email + "\nPassword: " + password + "\nUsername: " + user;
                 ByteArrayInputStream inputStream = new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
                 ObjectMetadata metadata = new ObjectMetadata();
                 metadata.setContentLength(data.length());

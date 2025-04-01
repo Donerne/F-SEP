@@ -1,40 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
     <!-- Back Button -->
-    <ImageView
-        android:id="@+id/backButton"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@android:drawable/ic_media_previous"/>
 
     <!-- Title -->
-    <TextView
-        android:id="@+id/companyTitle"
-        android:layout_width="match_parent"
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="36dp"
+        android:src="@android:drawable/ic_media_previous"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/threeForecastReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:padding="10dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:gravity="center"
-        android:padding="10dp"/>
+        app:layout_constraintStart_toEndOf="@+id/backButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.androidplot.xy.XYPlot
+        android:id="@+id/xyPlot"
+        android:layout_width="383dp"
+        android:layout_height="259dp"
+        android:layout_marginTop="40dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/threeForecastReport" />
+
+    <!--        app:title="My Line Chart" />-->
 
     <!-- Custom Line Chart -->
-    <View
-        android:id="@+id/lineChart"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@android:color/darker_gray"/>
 
     <!-- Forecast -->
+
     <TextView
         android:id="@+id/forecastText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="357dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="40dp"
         android:text="Loading..."
-        android:textSize="16sp"/>
-</LinearLayout>
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/xyPlot" />
+
+    <Button
+        android:id="@+id/ForecastButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:gravity="center|center_horizontal"
+        android:text="Next 3 Weeks Forecast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forecastText" />
+</androidx.constraintlayout.widget.ConstraintLayout>

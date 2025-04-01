@@ -12,9 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AuthApp">
         <activity
-            android:name=".HomeActivity"
+            android:name=".forecast_report_3_weeks"
             android:exported="false" />
-        <!-- Main launcher activity with explicit android:exported="true" -->
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" /> <!-- Main launcher activity with explicit android:exported="true" -->
         <activity
             android:name=".MainActivity"
             android:exported="true"> <!-- Required for Android 12+ -->
@@ -30,6 +32,12 @@
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
+        <activity
+            android:name=".CompaniesActivity"
+            android:exported="true" />
+        <activity
+            android:name=".StockPerformanceActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

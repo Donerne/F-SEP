@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/material_dynamic_secondary10"
     tools:context=".SignUpActivity">
 
     <ImageView
@@ -12,7 +13,7 @@
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
         android:contentDescription="App Logo"
-        android:src="@drawable/app_logo"
+        android:src="@drawable/chatgpt_image_f_sep_logo"
         app:layout_constraintBottom_toTopOf="@+id/signUpTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -26,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:text="Sign Up"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +67,7 @@
         android:layout_height="50dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="20dp"
-        android:backgroundTint="#FF5A5F"
+        android:backgroundTint="@color/teal_700"
         android:text="Sign Up"
         android:textColor="@android:color/white"
         android:textSize="16sp"
@@ -79,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="Already have an account? Sign In"
-        android:textColor="#FF5A5F"
+        android:textColor="@color/teal_700"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +90,7 @@
 
     <EditText
         android:id="@+id/userNameText"
-        android:layout_width="353dp"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="48dp"
         android:background="@android:drawable/edit_text"

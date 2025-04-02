@@ -124,37 +124,22 @@ public class forecast_report_3_weeks extends AppCompatActivity {
         // Fetching and plotting data
         new FetchAndPlotTask().execute(bucketName, key, accessKey, secretKey);
 
-//        downloadView.setOnClickListener(view -> {
-//            if (ContextCompat.checkSelfPermission(forecast_report_3_weeks.this,
-//                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
-//                    ContextCompat.checkSelfPermission(forecast_report_3_weeks.this,
-//                            Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//
-//                // Request the permissions
-//                ActivityCompat.requestPermissions(forecast_report_3_weeks.this,
-//                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
-//                        STORAGE_PERMISSION_CODE);
-//            } else {
-//                // Permission already granted, proceed with your task
-//                captureScreenAndSavePDF();
-//            }
-//        });
-
         downloadView.setOnClickListener(view -> {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                // For Android 11 (API 30) and above
-                if (!Settings.canDrawOverlays(this)) {
+                // Check if All Files Access permission is granted
+                if (!Environment.isExternalStorageManager()) {
                     Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                     intent.setData(Uri.parse("package:" + getPackageName()));
                     startActivity(intent);
-                    captureScreenAndSavePDF();
                 } else {
-                    captureScreenAndSavePDF();
+                    captureScreenAndSavePDF(); // Permission already granted
                 }
             } else {
-                // Android 6 to 12: Request old storage permissions
+                // Android 6 to Android 10: Use WRITE_EXTERNAL_STORAGE permission
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                } else {
+                    captureScreenAndSavePDF(); // Directly proceed for older Android versions
                 }
             }
         });

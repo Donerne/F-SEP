@@ -31,6 +31,8 @@ public class SignUpActivity extends AppCompatActivity {
     private String secretKey;
     private String bucketName;
 
+    private String userName;
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -54,7 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(v -> {
             String userEmail = email.getText().toString().trim();
             String userPassword = password.getText().toString().trim();
-            String userName = name.getText().toString().trim();
+            userName = name.getText().toString().trim();
 
             if (userEmail.isEmpty() || userPassword.isEmpty() || userName.isEmpty()) {
                 Toast.makeText(SignUpActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
@@ -63,7 +65,11 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        tvGoToSignIn.setOnClickListener(v -> startActivity(new Intent(SignUpActivity.this, SignInActivity.class)));
+        tvGoToSignIn.setOnClickListener(v -> {
+            Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
+            intent.putExtra("UserName", userName);
+            startActivity(intent);
+        });
     }
 
     private void uploadUserDataAsync(String email, String password, String user) {

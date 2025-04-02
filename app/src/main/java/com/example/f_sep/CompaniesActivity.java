@@ -9,9 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,60 +20,106 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.Objects;
-
 public class CompaniesActivity extends AppCompatActivity {
     private ListView companyList;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
-
+    private Button signOut;
+    private TextView userName;
+    private String intentUserName;
     private String[] companies = {"Nvidia, NVDA", "Google, GOOG", "Amazon, AMZN", "Facebook, META", "Microsoft, MSFT", "Apple, AAPL"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_companies);
 
-        // Set the Toolbar as ActionBar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        try {
+            // 1. Initialize Toolbar safely
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            if (toolbar == null) {
+                throw new RuntimeException("Toolbar not found in layout");
+            }
+            setSupportActionBar(toolbar);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
-        companyList = findViewById(R.id.company_list);
+            // 2. Initialize main views
+            drawerLayout = findViewById(R.id.drawer_layout);
+            navigationView = findViewById(R.id.nav_view);
+            companyList = findViewById(R.id.company_list);
 
-        toggle = new ActionBarDrawerToggle(
-                this,
-                drawerLayout,
-                toolbar,
-                R.string.open,
-                R.string.close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+            // Set username safely
+            intentUserName = getIntent().getStringExtra("UserName");
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            // 3. Safe header view initialization
+            if (navigationView != null) {
+                View headerView = navigationView.getHeaderView(0);
+                if (headerView != null) {
+                    signOut = headerView.findViewById(R.id.signoutButton);
+                    userName = headerView.findViewById(R.id.userNameText);
 
-        companyList.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, companies));
-
-//        // Inflate the menu programmatically
-//        navigationView.inflateMenu(R.menu.navigation_menu);
-
-        companyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                // Check if position is valid
-                if (position >= 0 && position < companies.length){
-                    // Obtaining item selected
-                    String selectedCompany = companies[position];
-
-                    Intent intent = new Intent(CompaniesActivity.this, StockPerformanceActivity.class);
-                    intent.putExtra("Selected_Company", selectedCompany);
-                    startActivity(intent);
+                    if (signOut != null) {
+                        signOut.setOnClickListener(v -> finishAffinity());
+                    }
+                    if (userName != null || intentUserName != null) {
+                        userName.setText(intentUserName);
+                    }
                 }
             }
-        });
+
+            // 4. Initialize Drawer Toggle
+            if (getSupportActionBar() != null) {
+                toggle = new ActionBarDrawerToggle(
+                        this,
+                        drawerLayout,
+                        toolbar,
+                        R.string.open,
+                        R.string.close);
+                drawerLayout.addDrawerListener(toggle);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+
+            // 5. Safe ListView setup
+            if (companyList != null) {
+                companyList.setAdapter(new ArrayAdapter<>(
+                        this,
+                        android.R.layout.simple_list_item_1,
+                        companies != null ? companies : new String[0]));
+
+                companyList.setOnItemClickListener((parent, view, position, id) -> {
+                    if (position >= 0 && position < companies.length) {
+                        Intent intent = new Intent(this, StockPerformanceActivity.class);
+                        intent.putExtra("Selected_Company", companies[position]);
+                        startActivity(intent);
+                    }
+                });
+            }
+
+        } catch (Exception e) {
+            Log.e("CompaniesActivity", "Initialization error", e);
+            // Optionally show error to user and finish
+            finish();
+        }
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        if (toggle != null) {
+            toggle.syncState();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (toggle != null && toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}
+
 
 //        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 //            // nav_forecast_reports
@@ -88,5 +135,3 @@ public class CompaniesActivity extends AppCompatActivity {
 //                return true;
 //            }
 //        });
-    }
-}

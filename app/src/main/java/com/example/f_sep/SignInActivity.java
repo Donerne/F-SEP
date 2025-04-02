@@ -28,6 +28,8 @@ public class SignInActivity extends AppCompatActivity {
     private String secretKey;
     private String bucketName;
 
+    private String userName;
+
 
 
     @Override
@@ -49,6 +51,9 @@ public class SignInActivity extends AppCompatActivity {
         btnSignIn = findViewById(R.id.btnSignIn);
         tvGoToSignUp = findViewById(R.id.tvGoToSignUp);
 
+        // Obtaining data from intent
+        userName = getIntent().getStringExtra("UserName");
+
 
         btnSignIn.setOnClickListener(v -> {
             String userEmail = email.getText().toString();
@@ -59,7 +64,6 @@ public class SignInActivity extends AppCompatActivity {
                 authenticateUserAsync(userEmail, userPassword);
             }
         });
-
 
         tvGoToSignUp.setOnClickListener(v -> startActivity(new Intent(SignInActivity.this, SignUpActivity.class)));
     }
@@ -101,6 +105,7 @@ public class SignInActivity extends AppCompatActivity {
                 if (isAuthenticated) {
                     Toast.makeText(SignInActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignInActivity.this, CompaniesActivity.class);
+                    intent.putExtra("UserName", userName);
                     startActivity(intent);
                     finish();
                 } else {

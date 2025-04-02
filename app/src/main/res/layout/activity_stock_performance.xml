@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/material_dynamic_secondary10">
 
     <!-- Back Button -->
 
@@ -19,6 +20,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="36dp"
         android:src="@android:drawable/ic_media_previous"
+        android:tint="@color/teal_700"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,6 +32,7 @@
         android:layout_marginTop="24dp"
         android:gravity="center"
         android:padding="10dp"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/backButton"
@@ -51,8 +54,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
+        android:backgroundTint="@color/teal_700"
         android:gravity="center|center_horizontal"
         android:text="Next 3 Weeks Forecast"
+        android:textColor="@color/white"
+        android:textColorLink="@color/teal_700"
+        app:iconTint="@color/teal_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/xyPlot" />

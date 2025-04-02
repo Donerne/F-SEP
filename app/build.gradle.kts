@@ -109,11 +109,3 @@ dependencies {
 }
 
 
-
-//configurations.all {
-//    resolutionStrategy {
-//        force ("com.amazonaws:aws-java-sdk-core:1.12.250")  // Force the Java SDK version of core
-//        force ("com.amazonaws:aws-java-sdk-s3:1.12.250")    // Force the Java SDK version of S3
-//    }
-
-

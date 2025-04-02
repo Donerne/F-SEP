@@ -55,7 +55,7 @@ public class StockPerformanceActivity extends AppCompatActivity {
         }
 
         TextView companyTitle = findViewById(R.id.threeForecastReport);
-        TextView forecastText = findViewById(R.id.forecastText);
+//        TextView forecastText = findViewById(R.id.forecastText);
         ImageView backButton = findViewById(R.id.backButton);
         Button forecastButton = findViewById(R.id.ForecastButton);
         xyPlot = findViewById(R.id.xyPlot);
@@ -68,7 +68,7 @@ public class StockPerformanceActivity extends AppCompatActivity {
         s3Utils = new S3Utils(accessKey, secretKey);
 
         companyTitle.setText(company);
-        forecastText.setText("Stock forecast: " + String.format("%.2f", (Math.random() * 5)) + "% change tomorrow");
+//        forecastText.setText("Stock forecast: " + String.format("%.2f", (Math.random() * 5)) + "% change tomorrow");
 
         // Fetching and plotting data
         new FetchAndPlotTask().execute(bucketName, key, accessKey, secretKey);
@@ -106,6 +106,7 @@ public class StockPerformanceActivity extends AppCompatActivity {
         }
     }
 
+
     private void plotData(List<String[]> csvData) {
         if (csvData == null || csvData.isEmpty()) {
             System.out.println("CSV data is empty or null!");
@@ -115,14 +116,9 @@ public class StockPerformanceActivity extends AppCompatActivity {
         List<Number> xValues = new ArrayList<>(); // Timestamps (long)
         List<Number> yValues = new ArrayList<>(); // Stock prices (double)
 
-        boolean isHeader = true;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
         for (String[] row : csvData) {
-            if (isHeader) {
-                isHeader = false;
-                continue; // Skip header row
-            }
 
             if (row.length < 2) {
                 System.out.println("Skipping row (insufficient columns): " + Arrays.toString(row));
@@ -154,7 +150,7 @@ public class StockPerformanceActivity extends AppCompatActivity {
         }
 
         // Create series (timestamps on X-axis, prices on Y-axis)
-        SimpleXYSeries series = new SimpleXYSeries(xValues, yValues, "Close Price Data");
+        SimpleXYSeries series = new SimpleXYSeries(xValues, yValues, "Last Month Stock Price History");
 
         // Format line (blue)
         LineAndPointFormatter formatter = new LineAndPointFormatter(

@@ -37,39 +37,23 @@
 
     <com.androidplot.xy.XYPlot
         android:id="@+id/xyPlot"
-        android:layout_width="383dp"
-        android:layout_height="259dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="382dp"
+        android:layout_height="472dp"
+        android:layout_marginTop="32dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/threeForecastReport" />
 
-    <!--        app:title="My Line Chart" />-->
-
-    <!-- Custom Line Chart -->
-
-    <!-- Forecast -->
-
-    <TextView
-        android:id="@+id/forecastText"
-        android:layout_width="357dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="40dp"
-        android:text="Loading..."
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/xyPlot" />
 
     <Button
         android:id="@+id/ForecastButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="56dp"
         android:gravity="center|center_horizontal"
         android:text="Next 3 Weeks Forecast"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forecastText" />
+        app:layout_constraintTop_toBottomOf="@+id/xyPlot" />
 </androidx.constraintlayout.widget.ConstraintLayout>

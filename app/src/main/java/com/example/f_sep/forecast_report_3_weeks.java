@@ -147,12 +147,10 @@ public class forecast_report_3_weeks extends AppCompatActivity {
                     Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                     intent.setData(Uri.parse("package:" + getPackageName()));
                     startActivity(intent);
+                    captureScreenAndSavePDF();
                 } else {
                     captureScreenAndSavePDF();
                 }
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                // Android 13+ (API 33): Request new scoped storage permissions
-                requestPermissions(new String[]{Manifest.permission.READ_MEDIA_IMAGES}, STORAGE_PERMISSION_CODE);
             } else {
                 // Android 6 to 12: Request old storage permissions
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -187,7 +185,7 @@ public class forecast_report_3_weeks extends AppCompatActivity {
             Toast.makeText(this, "PDF saved at: " + pdfFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Error saving PDF", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error saving PDF", Toast.LENGTH_LONG).show();
         }
 
         pdfDocument.close();

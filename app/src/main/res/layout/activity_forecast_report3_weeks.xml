@@ -40,9 +40,9 @@
 
     <com.androidplot.xy.XYPlot
         android:id="@+id/xyPlot"
-        android:layout_width="378dp"
-        android:layout_height="320dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="339dp"
+        android:layout_height="167dp"
+        android:layout_marginTop="24dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,14 +54,15 @@
 
     <TextView
         android:id="@+id/companyForecastTextView"
-        android:layout_width="373dp"
-        android:layout_height="22dp"
+        android:layout_width="353dp"
+        android:layout_height="19dp"
         android:layout_marginTop="20dp"
         android:text="TextView"
-        android:textAlignment="viewEnd"
+        android:textAlignment="textEnd"
         android:textColor="@color/design_default_color_error"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.259"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/xyPlot" />
 
@@ -77,23 +78,23 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="375dp"
-        android:layout_height="181dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="372dp"
+        android:layout_height="172dp"
+        android:layout_marginTop="24dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.818"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/companyForecastTextView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/weekOne"
-            android:layout_width="373dp"
-            android:layout_height="47dp"
+            android:layout_width="369dp"
+            android:layout_height="45dp"
             android:layout_marginTop="16dp"
             android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -138,8 +139,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/weekThree"
-            android:layout_width="358dp"
-            android:layout_height="52dp"
+            android:layout_width="355dp"
+            android:layout_height="41dp"
             android:layout_marginTop="124dp"
             android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -238,8 +239,8 @@
 
     <TextView
         android:id="@+id/textAlgorithmView"
-        android:layout_width="374dp"
-        android:layout_height="22dp"
+        android:layout_width="350dp"
+        android:layout_height="18dp"
         android:layout_marginTop="20dp"
         android:lines="@integer/material_motion_duration_medium_2"
         android:text="Algorithmic Breakdown"
@@ -247,7 +248,7 @@
         android:textColor="@color/design_default_color_error"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.782"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
@@ -263,13 +264,13 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="374dp"
-        android:layout_height="133dp"
+        android:layout_width="350dp"
+        android:layout_height="123dp"
         android:layout_marginTop="28dp"
         android:gravity="center|center_horizontal"
         android:text="The algorithm used to produce the forecast above was the Long-short term model (LSTM). The model used here may differ from the one used for other tech stocks. Furthermore, the model used for this company may change subject to better algorithms producing better forecasts.For more details, contact us."
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.782"
+        app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textAlgorithmView" />
 

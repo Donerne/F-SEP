@@ -72,7 +72,7 @@ public class S3Utils {
                 }
             }
         } catch (Exception e) {
-            System.err.println("Error fetching CSV from S3: " + e.getMessage());
+            System.err.println("Error fetching CSV: " + e.getMessage());
             throw e;
         }
 
